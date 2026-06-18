@@ -1,5 +1,6 @@
 package com.nicolasperussi.burger.product;
 
+import com.nicolasperussi.burger.core.exceptions.ResourceNotFoundException;
 import com.nicolasperussi.burger.product.dto.CreateProductRequest;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ public class ProductService {
     // find all products (add filtering by category)
     public Page<Product> findAll(Pageable pageable) {return repository.findAll(pageable);}
 
-    // find a single product by id
-    // create a product
+    public Product findById(String id) {
+        return this.repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
+                "Couldn't find Product with id " + id));
+    }
+
     public Product create(@NonNull CreateProductRequest data) {
         Product newProduct = new Product(data.name(), data.description(), data.price(), data.category(), true);
 
         return this.repository.save(newProduct);
     }
+
     // soft delete a product
 
 }

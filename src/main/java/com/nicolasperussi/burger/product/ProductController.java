@@ -2,6 +2,7 @@ package com.nicolasperussi.burger.product;
 
 import com.nicolasperussi.burger.product.dto.CreateProductRequest;
 import jakarta.validation.Valid;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,12 @@ public class ProductController {
     public ResponseEntity<Page<Product>> findAll(@PageableDefault(size = 10, page = 0, sort = "category") Pageable pageable) {
         Page<Product> products = this.service.findAll(pageable);
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> findById(@NonNull @PathVariable String id) {
+        Product product = this.service.findById(id);
+        return ResponseEntity.ok(product);
     }
 
     @PostMapping()
