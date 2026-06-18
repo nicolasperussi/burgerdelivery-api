@@ -29,5 +29,12 @@ public class ProductService {
     }
 
     // soft delete a product
+    public Product delete(String id) {
+        Product product = this.repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(
+                "Couldn't find Product with id " + id));
+
+        product.setAvailable(false);
+        return this.repository.save(product);
+    }
 
 }

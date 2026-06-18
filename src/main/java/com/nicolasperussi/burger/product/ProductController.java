@@ -37,4 +37,10 @@ public class ProductController {
         URI uri = uriBuilder.path("/product/{id}").buildAndExpand(product.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@NonNull @PathVariable String id) {
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
