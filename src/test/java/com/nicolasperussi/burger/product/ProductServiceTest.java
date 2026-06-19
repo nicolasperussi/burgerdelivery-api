@@ -48,5 +48,7 @@ class ProductServiceTest {
         Mockito.when(repository.findById(fakeId)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {service.delete(fakeId);});
+
+        Mockito.verify(repository, Mockito.never()).save(Mockito.any(Product.class));
     }
 }
