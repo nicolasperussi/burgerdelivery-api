@@ -1,5 +1,6 @@
 package com.nicolasperussi.burger.product;
 
+import com.nicolasperussi.burger.core.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,5 +39,14 @@ class ProductServiceTest {
         Assertions.assertFalse(result.getAvailable());
 
         Mockito.verify(repository).save(fakeProduct);
+    }
+
+    @Test
+    void shouldThrowResourceNotFoundExceptionWhenProductNotFound() {
+        String fakeId = "fake-uuid";
+
+        Mockito.when(repository.findById(fakeId)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {service.delete(fakeId);});
     }
 }
