@@ -16,14 +16,12 @@ public class Client extends User {
     @JsonIgnoreProperties("client")
     private List<Address> addresses;
 
-
     public Client() {
     }
 
-    public Client(String name, String email, String password, String phone, List<Address> addresses) {
+    public Client(String name, String email, String password, String phone) {
         super(name, email, password);
         this.phone = phone;
-        this.addresses = addresses;
     }
 
     public String getPhone() {
@@ -38,7 +36,8 @@ public class Client extends User {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void addAddress(Address address) {
+        this.getAddresses().add(address);
+        address.setClient(this);
     }
 }
