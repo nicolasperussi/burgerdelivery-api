@@ -24,12 +24,14 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, String number, String cep, Boolean isDefault) {
+    public Address(String street, String number, String cep, Boolean isDefault, Client client) {
         this.street = street;
         this.number = number;
         this.cep = cep;
         this.isDefault = isDefault;
+        this.client = client;
     }
+
 
     public String getId() {
         return id;

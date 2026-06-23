@@ -41,9 +41,8 @@ public class ClientService {
                 "Couldn't find Client with id " + clientId));
 
         // instantiate new address
-        Address newAddress = new Address(data.street(), data.number(), data.cep(), data.isDefault());
+        Address newAddress = new Address(data.street(), data.number(), data.cep(), data.isDefault(), client);
         client.addAddress(newAddress);
-        newAddress.setClient(client);
 
         // check if new address is default
         // if it is default, change all other client addresses isDefault to false
