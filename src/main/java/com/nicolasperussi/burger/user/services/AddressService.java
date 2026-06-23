@@ -31,7 +31,7 @@ public class AddressService {
         if (!addresses.isEmpty()) {
             for (Address a : addresses) {
                 a.setDefault(false);
-                repository.save(address);
+                repository.save(a);
             }
         }
 
